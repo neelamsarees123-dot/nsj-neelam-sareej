@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSJ - Neelam Sarees | A Saree Destination</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-bg: #121212;
+            --card-bg: #1E1E1E;
+            --text-light: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #000000, #1a1a1a);
+            border-bottom: 2px solid var(--primary-gold);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand-logo {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-gold);
+        }
+
+        .logo-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary-gold);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: #aaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-btns button {
+            background: transparent;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-btns button:hover {
+            background: var(--primary-gold);
+            color: #000;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 70px 20px;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            border-bottom: 1px solid #333;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Admin Panel Modal */
+        .admin-panel {
+            background: var(--card-bg);
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--primary-gold);
+            display: none;
+        }
+
+        .admin-panel h2 {
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .form-group input[type="file"] {
+            padding: 7px;
+            background: #1e1e1e;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background: var(--primary-gold);
+            color: #000;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #e6c240;
+        }
+
+        /* Main Catalog */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            color: var(--primary-gold);
+            margin-bottom: 40px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .product-desc {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .whatsapp-btn {
+            display: block;
+            width: 100%;
+            background: #25D366;
+            color: #fff;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1EBE5D;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 0, 0, 0.85);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: red;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border-top: 1px solid #222;
+            color: #777;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=200&q=80" alt="NSJ Logo" class="brand-logo" id="headerLogo">
+            <div class="logo-text">
+                <h1>NSJ - NEELAM SAREES</h1>
+                <p>A Saree Destination</p>
+            </div>
+        </div>
+        <div class="nav-btns">
+            <button onclick="toggleAdmin()"><i class="fa-solid fa-plus-circle"></i> Add New Saree</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>शाही और खूबसूरत साड़ियों का विशाल संग्रह</h2>
+        <p>बनारसी, कांजीवरम और डिज़ाइनर साड़ियां सीधे नीलम साड़ीज़ से।</p>
+    </section>
+
+    <!-- Admin Panel to Add Sarees -->
+    <div class="admin-panel" id="adminPanel">
+        <h2>नई साड़ी जोड़ें (Upload from Computer)</h2>
+        <form id="sareeForm">
+            <div class="form-group">
+                <label>साड़ी का नाम (Saree Name)</label>
+                <input type="text" id="sareeName" placeholder="उदा. Exclusive Banarasi Silk Saree" required>
+            </div>
+            <div class="form-group">
+                <label>कीमत (Price in ₹)</label>
+                <input type="number" id="sareePrice" placeholder="उदा. 4500" required>
+            </div>
+            <div class="form-group">
+                <label>कंप्यूटर से साड़ी की फोटो चुनें (Upload Image)</label>
+                <input type="file" id="sareeImgFile" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label>विवरण (Description)</label>
+                <textarea id="sareeDesc" rows="3" placeholder="कपड़ा, जरी वर्क, रंग आदि विवरण..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">साड़ी लाइव करें</button>
+        </form>
+    </div>
+
+    <!-- Product Catalog -->
+    <div class="container">
+        <h2 class="section-title">Exclusive Collection</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Dynamic Sarees will load here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 NSJ - Neelam Sarees. All Rights Reserved. A Saree Destination.</p>
+    </footer>
+
+    <!-- JavaScript for Dynamic Functionality -->
+    <script>
+        // आपका असली WhatsApp नंबर यहाँ जोड़ दिया गया है: 9571336242
+        const ownerWhatsAppNumber = "919571336242"; 
+
+        // Initial Sample Sarees Data if localStorage is empty
+        let sarees = JSON.parse(localStorage.getItem('nsjSareesData')) || [
+            {
+                id: 1,
+                name: "Royal Banarasi Brocade Saree",
+                price: 5499,
+                img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80",
+                desc: "शुद्ध सिल्क फैब्रिक, भारी जरी वीविंग और रिच पल्लू के साथ।"
+            },
+            {
+                id: 2,
+                name: "Kanjivaram Traditional Silk",
+                price: 7899,
+                img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80",
+                desc: "पारंपरिक डिज़ाइन, गोल्डन ज़री बॉर्डर।"
+            }
+        ];
+
+        function renderSarees() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = "";
+
+            sarees.forEach((saree, index) => {
+                let message = encodeURIComponent(`Hello, I want to buy this saree from NSJ Neelam Sarees:\n\n*${saree.name}*\nPrice: ₹${saree.price}\n\nPlease share more details.`);
+                let waLink = `https://wa.me/${ownerWhatsAppNumber}?text=${message}`;
+
+                let card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <button class="delete-btn" onclick="deleteSaree(${index})"><i class="fa-solid fa-trash"></i></button>
+                    <img src="${saree.img}" alt="${saree.name}" class="product-img">
+                    <div class="product-details">
+                        <h3 class="product-title">${saree.name}</h3>
+                        <p class="product-desc">${saree.desc}</p>
+                        <div class="product-price">₹${saree.price.toLocaleString('en-IN')}</div>
+                        <a href="${waLink}" target="_blank" class="whatsapp-btn">
+                            <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Toggle Admin Panel
+        function toggleAdmin() {
+            const panel = document.getElementById('adminPanel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Add New Saree with Local Computer Image Conversion
+        document.getElementById('sareeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('sareeName',).value;
+            const price = Number(document.getElementById('sareePrice').value);
+            const desc = document.getElementById('sareeDesc').value;
+            const fileInput = document.getElementById('sareeImgFile');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = e.target.result; // Base64 image data
+                    const newSaree = { id: Date.now(), name, price, img, desc };
+                    sarees.unshift(newSaree);
+
+                    localStorage.setItem('nsjSareesData', JSON.stringify(sarees));
+                    renderSarees();
+                    document.getElementById('sareeForm').reset();
+                    document.getElementById('adminPanel').style.display = 'none';
+                    alert('साड़ी सफलतापूर्वक NSJ Neelam Sarees पर लाइव हो गई है!');
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        });
+
+        // Delete Saree
+        function deleteSaree(index) {
+            if(confirm('क्या आप वाकई इस साड़ी को हटाना चाहते हैं?')) {
+                sarees.splice(index, 1);
+                localStorage.setItem('nsjSareesData', JSON.stringify(sarees));
+                renderSarees();
+            }
+        }
+
+        // Initial Load
+        renderSarees();
+    </script>
+</body>
+</html>
